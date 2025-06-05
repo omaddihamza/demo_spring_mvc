@@ -1,39 +1,45 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.5/css/bootstrap.min.css">
+
 </head>
 <body>
-<div class="container mt-5">
-    <h1 class="mb-4 text-center">Product List</h1>
-    <table class="table table-bordered table-hover table-striped">
-        <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Price ($)</th>
-            <th>Quantity</th>
-            <th>Actions</th> <!-- Nouvelle colonne -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.id}"></td>
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.price}"></td>
-            <td th:text="${product.quantity}"></td>
-            <td>
-                <a th:href="@{'/delete/' + ${product.id}}" class="btn btn-danger btn-sm"
-                   onclick="return confirm('Are you sure you want to delete this product?');">
-                    Delete
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
+<div layout:fragment="content">
+    <div>
+        <a class="btn btn-primary" th:href="@{'/newProduct'}">new Product</a>
+    </div>
+    <div class="mt-2">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price (dhs)</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.quantity}"></td>
+                <td>
+                    <a th:href="@{'/delete/' + ${product.id}}" class="btn btn-danger btn-sm"
+                       onclick="return confirm('Are you sure you want to delete this product?');">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>
