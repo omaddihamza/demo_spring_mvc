@@ -19,7 +19,7 @@ import java.util.List;
 public class ProductController {
     private final ProductRepository productRepository;
 
-    @GetMapping("/index")
+    @GetMapping("user/index")
     public String index(Model model) {
         List<Product> products = productRepository.findAll();
         model.addAttribute("products", products);
@@ -28,22 +28,22 @@ public class ProductController {
 
     @GetMapping("/")
     public String home() {
-        return "redirect:/index";
+        return "redirect:user/index";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/admin/delete/{id}")
     public String  deleteProducts(@PathVariable Long id) {
         productRepository.deleteById(id);
-        return "redirect:/index";
+        return "redirect:/user/index";
     }
 
-    @GetMapping("/newProduct")
+    @GetMapping("/admin/newProduct")
     public String newProduct(Model model) {
         model.addAttribute("product", new Product());
         return "newProduct";
     }
 
-    @PostMapping("/saveProduct")
+    @PostMapping("/admin/saveProduct")
     public String saveProduct(@Valid Product product, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "newProduct";
         Product newProduct = new Product();
@@ -51,7 +51,7 @@ public class ProductController {
         newProduct.setPrice(product.getPrice());
         newProduct.setQuantity(product.getQuantity());
         productRepository.save(newProduct);
-        return "redirect:/index";
+        return "redirect:/user/index";
     }
 
 }
