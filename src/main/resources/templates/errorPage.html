@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center vh-100">
+<div layout:fragment="content">
+    <div class="alert alert-danger shadow p-4 rounded" role="alert">
+        <h1 class="alert-heading">Error</h1>
+        <p th:text="${errorMessage}">An unexpected error occurred.</p>
+        <hr>
+        <a th:href="@{/admin/products}" class="btn btn-outline-danger mt-2">Back to Products</a>
+    </div>
+</div>
+</body>
+</html>
