@@ -2,6 +2,7 @@
 <html lang="en"
     xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="layout">
 <head>
     <meta charset="UTF-8">
@@ -10,9 +11,21 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div>
-        <a class="btn btn-primary" th:href="@{'/newProduct'}">new Product</a>
+
+    <div class="d-flex mb-3 align-items-center">
+        <div sec:authorize="hasRole('ADMIN')">
+            <a class="btn btn-info" th:href="@{/admin/newProduct}">Nouveau produit</a>
+        </div>
+        <div class="">
+            <form th:action="@{/user/index}" method="get" class="d-flex">
+                <input type="text" name="name" placeholder="Rechercher un produit..."
+                       th:value="${param.name}" class="form-control me-2" />
+                <button class="btn btn-primary" type="submit">Rechercher</button>
+            </form>
+        </div>
     </div>
+
+
     <div class="mt-2">
         <table class="table table-bordered">
             <thead class="table-dark">
@@ -21,7 +34,7 @@
                 <th>Name</th>
                 <th>Price (dhs)</th>
                 <th>Quantity</th>
-                <th>Actions</th>
+                <th sec:authorize="hasRole('ADMIN')">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -30,11 +43,19 @@
                 <td th:text="${product.name}"></td>
                 <td th:text="${product.price}"></td>
                 <td th:text="${product.quantity}"></td>
-                <td>
-                    <a th:href="@{'/delete/' + ${product.id}}" class="btn btn-danger btn-sm"
-                       onclick="return confirm('Are you sure you want to delete this product?');">
-                        Delete
-                    </a>
+                <td sec:authorize="hasRole('ADMIN')">
+                    <div class="d-flex flex-row">
+                       <div class="me-2">
+                           <form method="post" th:action="@{'/admin/delete/' + ${product.id}}">
+                               <button class="btn btn-danger btn-sm">Delete</button>
+                           </form>
+                       </div>
+                       <div>
+                           <form method="get" th:action="@{'/admin/edit/' + ${product.id}}">
+                               <button class="btn btn-primary btn-sm">Edit</button>
+                           </form>
+                       </div>
+                    </div>
                 </td>
             </tr>
             </tbody>
