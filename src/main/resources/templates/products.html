@@ -12,12 +12,12 @@
 <body>
 <div layout:fragment="content">
 
-    <div class="d-flex mb-3 align-items-center">
+    <div class="d-flex mb-3 align-items-center justify-content-between">
         <div sec:authorize="hasRole('ADMIN')">
             <a class="btn btn-info" th:href="@{/admin/newProduct}">Nouveau produit</a>
         </div>
         <div class="">
-            <form th:action="@{/user/index}" method="get" class="d-flex">
+            <form th:action="@{/user/index}" method="get" class="d-flex ">
                 <input type="text" name="name" placeholder="Rechercher un produit..."
                        th:value="${param.name}" class="form-control me-2" />
                 <button class="btn btn-primary" type="submit">Rechercher</button>
