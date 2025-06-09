@@ -10,6 +10,7 @@
 </head>
 <body>
 <div layout:fragment="content">
+    <h1>New product</h1>
     <form method="post" th:action="@{/admin/saveProduct}">
         <input type="hidden" name="id" th:value="${product.id}" />
         <div class="mb-3">
