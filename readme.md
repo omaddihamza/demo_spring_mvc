@@ -42,5 +42,5 @@ Elle permet de **gérer une liste de produits** (CRUD + recherche + sécurité),
 
 <img src="./src/main/resources/images/img.png">
 <img src="./src/main/resources/images/img_3.png">
-<img src="./src/main/resources/images/img_1.png">
+<img src="./src/main/resources/images/img_4.png">
 <img src="./src/main/resources/images/img_2.png">
